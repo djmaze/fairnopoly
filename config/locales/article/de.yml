@@ -1,0 +1,172 @@
+de:
+  # Article Model/Controller
+
+  articles:
+    boxes:
+      content: "Artikelbeschreibung"
+      payment: "Versand und Bezahlung"
+      commendation: "Auszeichnung des Artikels"
+      terms: "AGB"
+      cancellation: "Widerrufsbelehrung und Rücknahme"
+      about: "Impressum und Kontakt"
+      report: "Dein Feedback zu dem Artikel"
+      contact_private_user: 'Rückfragen an den*die Verkäufer*in'
+    export:
+      nothing_available: "Sobald Du Artikel auf Fairnopoly eingestellt hast, kannst Du sie hier exportieren"
+      all: "Alle Artikel als CSV Datei exportieren"
+      active: "Alle eingestellten Artikel als CSV Datei exportieren"
+      inactive: "Alle nicht eingestellten Artikel als CSV Datei exportieren"
+      sold: "Alle verkauften Artikel als CSV exportiernen"
+      bought: "Alle gekauften Artikel als CSV exportieren"
+      error_articles: "Fehlerhafte Artikel als CSV exportieren"
+  article:
+    activate_to_buy: "Ich will alle meine Artikel zum Verkauf freischalten"
+    not_activate_to_buy: "Ich will meine Artikel nicht freischalten"
+    delete_confirm: "Soll der Artikel '%{name}' wirklich gelöscht werden?"
+    included_short: "Inkl."
+    deactivate_confirm: "Um einen Artikel bearbeiten oder löschen zu können, musst Du diesen zuerst vom Marktplatz nehmen. Bitte beachte, dass der Artikel in der Zeit nicht mehr auf dem Marktplatz erscheint und auch aus allen Sammlungen entfernt wird, welche diesen enthalten. Dadurch sollen interessierte Käufer*innen, die sich zum Beispiel den Artikel für einen Kauf vorgemerkt haben, vor unbemerkten Änderungen an dem Artikel geschützt werden. <br/><br/>"
+    vat: "Mehrwertsteuer"
+    vat_included: "Inkl. %{mwst}% Mehrwertsteuer"
+    included_short: "Inkl."
+    transport:
+      placeholders:
+        type1_provider: "z.B. DHL Paket"
+        type2_provider: "z.B. DHL Päckchen"
+    show:
+      fair_percent: "Das faire Prozent"
+      friendly_percent: "Spendenanteil"
+      will_be: " werden an "
+      donate_html: "1% werden von uns an <a href='http://www.transparency.de/' target='_blank'>Transparency International</a> gespendet"
+      donate_ngo_html: "100% des Erlöses gehen an %{ngo}. Es fallen keine Fairnopoly-Gebühren an."
+      donate_ngo_short_html: "%{percent}% gehen an %{ngo}"
+      friendly_percent_html: "Diese*r Händer*in spendet %{percent}% an %{ngo}"
+      agree: "Ja"
+      non_agree: "Nein"
+      contributed: " gespendet."
+      title_addition: " zu kaufen bei Fairnopoly"
+      alternative: "Faire Alternative"
+      no_alternative: 'Hier zeigen wir Dir eine faire Alternative zu dem Artikel. Leider wurde in diesem Fall keine Alternative gefunden. Du kennst einen passenden Artikel? Dann melde Dich an und sende Deinen Vorschlag unter "Dein Feedback zu dem Artikel"'
+      images_pending: "Die Bilder zu diesem Artikel sind noch nicht vollständig vom System bearbeitet. Du kannst sie anklicken um sie dennoch anzusehen."
+      report: "Wenn Du bei diesem Artikel einen Betrug oder Missbrauch vermutest, oder Fairnopoly einen sonstigen Kommentar zu diesem Artikel zukommen lassen möchtest, trage das hier ein:"
+      contact:
+        description: 'Du hast noch Fragen? Trage diese in dem untenstehenden Feld ein, um dem*der Verkäufer*in eine Nachricht zu senden.'
+        email_transfer_accepted_label: "Ich bin damit einverstanden, dass meine E-Mail-Adresse an den*die Verkäufer*in als Rücksendeadresse übermittelt wird."
+        acceptance_error: 'Es ist nötig, der Übermittlung Deiner E-Mail-Adresse zuzustimmen, damit der*die Verkäufer*in die Möglichkeit hat, Dir zu antworten.'
+        empty_error: 'Bitte fülle das Nachrichtenfeld aus um den*die Verkäufer*in zu kontaktieren.'
+        long_error: 'Bitte benutze für Deine Rückfrage nicht mehr als 2000 Zeichen.'
+        success_notice: 'Deine Nachricht wurde an den*die Verkäufer*in übermittelt.'
+        action: 'Nachricht senden'
+        mail_subject: "Nutzer*innen-Rückfrage zu Deinem Artikel auf Fairnopoly"
+    hero:
+      search: "Suche nach"
+      filter: "Filter nach"
+      category: "Kategorie wählen"
+      remove_filter: "Zustands-Filter entfernen"
+      sunspot_failure: "Leider ist die Suche im Moment nicht verfügbar. Das Fairnopoly-Team arbeitet bereits an einer Lösung. Solange die Suche nicht verfügbar ist, kannst Du hier alle Artikel selbst durchsuchen."
+    form:
+      missing_terms: "Bevor Du einen Artikel einstellen kannst, muss Folgendes im Profil angegeben werden:"
+      edit_terms: "AGB, Widerrufserklärung und Impressum bearbeiten"
+      head: "Um einen Artikel einzustellen, mußt Du dieses Formular ausfüllen."
+      category: "Wähle eine Kategorie für Deinen Artikel"
+      details: "Beschreibe Deinen Artikel"
+      expire_date: "Datum (Tag/Monat/Jahr)"
+      expire_time: "Zeit (Stunden/Minuten)"
+      transaction:
+        article: "Auktion"
+        fixed_price: "Festpreis"
+        preview: "Vorschau - wird bei Launch freigeschaltet"
+      errors:
+        invalid_transport_option: "Bitte gib mindestens eine Versandoption an"
+        invalid_payment_option: "Bitte gib mindestens eine Bezahloption an"
+        paypal_details_missing: "Bitte gib Deine PayPal-Daten im Profil ein"
+        bank_details_missing: "Bitte gib Deine Bankdaten an"
+        social_producer_questionnaire:
+          no_social_producer: "Bitte beantworte mindestens eine der Fragen mit 'Ja'"
+        only_one_title_image: "Nur ein Bild kann Titelbild sein!"
+    labels:
+      shipping_options: "Versandoptionen:"
+      payment_options: "Bezahloptionen:"
+      payment: "Bezahloption"
+      price: "Preis"
+      shipping_condition: "Versand-Zustand"
+      expiration_date: "Ablaufdatum"
+      type: "Angebotsart"
+      submit: "Angebot gebührenpflichtig einstellen"
+      submit_free: "Angebot gebührenfrei einstellen"
+      submit_with_fp: "Angebot gebührenpflichtig und mit Spendenanteil einstellen"
+      continue_to_preview: "Weiter zur Artikelvorschau"
+      deactivate: "Vom Marktplatz nehmen"
+      edit_as_new: "Bearbeiten und wiedereinstellen"
+      edit_or_delete: "Bearbeiten oder löschen"
+    list:
+      header: "Ergebnisse"
+    notices:
+      mass_upload_create_html: "Die Artikel wurden erfolgreich eingestellt!"
+      create_html: "Artikel wurde erfolgreich eingestellt!"
+      confirm_to_buy: "Artikel wurde erfolgreich zum Verkauf eingestellt!"
+      update: "Artikel wurde erfolgreich aktualisiert."
+      image: "Bild wurde erfolgreich hochgeladen."
+      incomplete_profile: 'Um Artikel anbieten zu können, musst Du zunächst die Pflichtfelder in Deinem Profil ausfüllen. Du wirst auf die "Profil bearbeiten"-Seite weitergleitet.'
+      inactive: "Der aufgerufene Artikel wurde leider vom Marktplatz genommen!"
+      locked: "Da der Artikel bereits zum Verkauf stand kann er nicht mehr bearbeitet werden!"
+      deactivated: "Artikel wurde erfolgreich vom Marktplatz genommen!"
+      max_limit: "Der maximale Warenwert wurde überschritten. Um weitere Artikel einstellen zu können, musst Du andere Artikel vom Marktplatz nehmen."
+    image:
+      title: "Lade ein Bild hoch"
+      upload: "Hochladen"
+    titles:
+      new: "Artikel einstellen"
+      edit: "Artikel bearbeiten"
+      other-products: "Alle Artikel dieses Verkäufers"
+      libraries: "Öffentliche Sammlungen, die diesen Artikel enthalten"
+      sunspot_failure: "Suche nicht verfügbar"
+      preview: "Dein Artikel"
+
+    actions:
+      edit: "Artikel bearbeiten"
+      profile: "Verkäufer*in ansehen"
+      report: "Feedback senden"
+      reported: "Erfolgreich gesendet."
+      reported-error: "Du musst einen Text schreiben um ein Feedback zu senden."
+    categories:
+      proposal:
+        question: "Kategorie vorschlagen:"
+      remove-filter:  "Kategorie-Filter entfernen"
+    preview:
+      fees_and_donations:
+        title: "Deine Gebühren und Spenden"
+        mass_upload_title: "Deine Gebühren und Spenden bei Verkauf <b>aller</b> Artikel"
+        fair_percent: "Das faire Prozent (1%):"
+        mass_upload_fair_percent: "Das faire Prozent (1%) bei Verkauf aller Artikel (gemäß der angegebenen Stückzahl):"
+        friendly_percent: "Deine Spende:"
+        fee: "Gebühr bei Verkauf   (%{fee} - max. %{max}, min. € 0,10):"
+        total_fee_mass_upload: "Gebühr bei Verkauf aller Artikel (gemäß der angegebenen Stückzahl)"
+        total: "Gesamt bei Verkauf, inkl. 19% MwSt:"
+        total_mass_upload: "gesamt bei Verkauf des Artikels (gemäß der angegebenen Stückzahl), inkl. 19% MwSt:"
+        total_all_articles: "Gesamt bei Verkauf aller Artikel (gemäß der angegebenen Stückzahl) inkl 19% MwSt:"
+        quarter_fee: "Zzgl. der Quartalsgebühr von 1,- Euro (inkl. 19% MwSt)."
+        netto: "Nettobetrag:"
+        total_fee_all_articles: "Deine Gebühren und Spenden beim Verkauf aller Artikel belaufen sich inkl. Mwst. auf:"
+
+      double_check:
+        title: Alle Angaben überprüft?
+      tooltips:
+        fp_fee_info: >
+          %{percent}% des Artikelendpreises werden bei erfolgreichem Verkauf von Dir an %{ngo} gespendet. Auf den Spendenanteil fallen keine Verkaufsgebühren an. Informationen zur Spendenabwicklung findest Du <a href='https://www.fairnopoly.de/faq#spa2' target='_blank'>hier</a> und in der Bestätigungsmail bei erfolgreichem Verkauf.
+        fees_quarter_fee: "Zusätzlich zu den Verkaufsgebühren wird je Geschäftsquartal, in dem Du erfolgreich mindestens einmal verkauft hast, eine Quartalsgebühr von 1,- Euro fällig (inkl. 19% MwSt)."
+        fees_mass_upload: "Bei erfolgreichem Verkauf jedes Artikels gehen 6% des Artikelendpreises an Fairnopoly. Bei Artikeln unter dem Filter fair fallen lediglich 3% an. Der hier aufgeführte Betrag bezieht auf die summierten Gebühren beim erfolgreichen Verkauf aller Artikel (gemäß der angegebenen Stückzahl)."
+        fees_and_donations: "1% des Artikelendpreises wird bei erfolgreichem Verkauf durch uns automatisch an Initiativen, die sich gegen Korruption einsetzen, gespendet."
+        friendly_percent: "%{percent}% des Artikelendpreises wird bei erfolgreichem Verkauf durch den Verkäufer an %{ngo} gespendet."
+        fees_and_donations_mass_upload: "1% des Artikelendpreises wird bei erfolgreichem Verkauf automatisch an Initiativen, die sich gegen Korruption einsetzen, gespendet. Da das 1% für jeden Artikel einzeln berechnet, eventuell aufgerundet und dann für alle hochgeladenen Artikel summiert wird, ist der hier ausgewiesene Betrag möglicherweise höher als 1%."
+        fees: "Die Gebührentabelle findest Du <hier>."
+        double_check: >
+          Dann stelle Deinen Artikel ein. Das Einstellen des Artikels ist kostenlos, bei Verkauf fallen die unter Gebühren und Spenden gelisteten Verkaufsgebühren an.
+  article_templates:
+    titles:
+      index: Deine Vorlagen
+      new: Vorlage erstellen
+      edit: Vorlage bearbeiten
+      destroy: Vorlage löschen
+    actions:
+      index: "zur Vorlagenübersicht"
+      new: "Neue Vorlage erstellen"

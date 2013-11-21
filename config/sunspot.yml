@@ -1,0 +1,29 @@
+production:
+  solr:
+    hostname: 10.0.2.180
+    port: 8983
+    log_level: WARNING
+    # read_timeout: 2
+    # open_timeout: 0.5
+
+development:
+  solr:
+    hostname: localhost
+    port: 8982
+    log_level: INFO
+
+staging:
+  solr:
+    hostname: localhost
+    port: 8983
+    log_level: INFO
+    pid_dir: <%= File.join('var','www','fairnopoly' , 'shared', 'pids') %>
+    data_path: <%= File.join('var','www','fairnopoly','shared', 'solr', 'data') %>
+    solr_home:  <%=File.join(::Rails.root, 'solr') %>
+
+test:
+  solr:
+    hostname: localhost
+    port: <%= 8981 + ENV['TEST_ENV_NUMBER'].to_i %>
+    log_level: WARNING
+    data_path: <%= File.join(::Rails.root, 'solr', 'data', ::Rails.env, ENV['TEST_ENV_NUMBER'].to_i.to_s) %>

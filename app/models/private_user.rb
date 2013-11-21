@@ -1,3 +1,0 @@
-class PrivateUser < User
-  
-end

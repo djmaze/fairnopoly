@@ -1,75 +1,80 @@
+#
+#
+# == License:
+# Fairnopoly - Fairnopoly is an open-source online marketplace.
+# Copyright (C) 2013 Fairnopoly eG
+#
+# This file is part of Fairnopoly.
+#
+# Fairnopoly is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Fairnopoly is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with Fairnopoly.  If not, see <http://www.gnu.org/licenses/>.
+#
 module ApplicationHelper
-  #### Bootstrap Helpers ####
-  
-  # Map Flash to Bootstrap CSS
-  def bootstrap_notice_mapper(type)
-    case type
-    when :alert
-      "warning"
-    when :error
-      "error"
-    when :notice
-      "success"
+
+
+  def hero
+    hero = ""
+    begin
+      if @rendered_hero
+        hero += render :partial => "/hero/#{@rendered_hero[:controller]}/#{@rendered_hero[:action]}"
+      else
+        hero += render :partial => "/hero/#{params[:controller]}/#{params[:action]}"
+      end
+    rescue ActionView::MissingTemplate
+      begin
+        hero += render :partial => "/hero/#{params[:controller]}/default"
+      rescue ActionView::MissingTemplate
+      end
+    end
+    return hero.html_safe
+  end
+
+  def title(title = nil)
+    if title.present?
+      content_for :title, title
     else
-    "info"
+      content_for?(:title) ? content_for(:title) + t('article.show.title_addition') : t('common.fairnopoly')
     end
   end
-  
-  # Glyph Icons Helpers 
-  def glyphicons(name)
-    "<i class=\"" + name + "\"></i>".html_safe
+
+  def meta_keywords(tags = nil)
+    if tags.present?
+      content_for :meta_keywords, tags
+    else
+      content_for?(:meta_keywords) ? [content_for(:meta_keywords), t('meta_tags.keywords')].join(', ') : t('meta_tags.keywords')
+    end
   end
-  
-  def glyphicons_inv(name)
-    "<i class=\"" + name + " icon-white\"></i>".html_safe
+
+  def meta_description(desc = nil)
+    if desc.present?
+      content_for :meta_description, desc
+    else
+      content_for?(:meta_description) ? content_for(:meta_description) : t('meta_tags.description')
+    end
   end
-  
-  ### Others ###
-  
-  def params_without key
-    new_param = Hash.new
-    new_param.merge!(params)
-    new_param.delete key
-    new_param
+
+  def truncate_and_sanitize_without_linebreaks(text = "", length = 70, omission ='', separator = ' ')
+      truncate(Sanitize.clean(text), length: length, separator: separator, omission: omission ).gsub("\n", ' ')
   end
-  
-   def params_without_reset_page key
-    new_param = Hash.new
-    new_param.merge!(params)
-    new_param.delete key
-    new_param.delete "page"
-    new_param
+
+  def search_cache
+    @search_cache || Article.new
   end
-  
-  def params_with key, value
-    new_param = Hash.new
-    new_param.merge!(params)
-    new_param[key] = value
-    new_param
+
+  # Login form anywhere - https://github.com/plataformatec/devise/wiki/How-To:-Display-a-custom-sign_in-form-anywhere-in-your-app
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
   end
-  
-  def params_replace(old, new, value)
-     new_param = Hash.new
-     new_param.merge!(params)
-     new_param[new] = value
-     new_param.delete old
-     new_param
-  end
-   
-  def hero
-    hero = "<div id=\"hero\">"
-    begin 
-       hero += render :partial => '/hero/'+ params[:controller] + '/' + params[:action] 
-       hero << "</div>"   
-        rescue ActionView::MissingTemplate
-          begin
-            hero += render :partial => '/hero/'+ params[:controller] + '/default' 
-            hero << "</div>"   
-          rescue ActionView::MissingTemplate 
-            hero = ""
-          end
-     end
-      return hero 
-  end
-   
+
+
 end

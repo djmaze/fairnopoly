@@ -1,7 +1,7 @@
 en:
 # Enum Definitions
   enumerize:
-    auction:
+    article:
       condition:
         new: "New"
         old: "Used"
@@ -11,6 +11,7 @@ en:
 # Common Texts
   common:
     brand: "fairnopoly.de"
+    fairnopoly: "Fairnopoly"
     actions:
       back: "Back"
       show: "Show"
@@ -35,7 +36,7 @@ en:
       password: "Password"
       login: "Sign In"
       search: "Search"
-      auctions: "Auctions"
+      articles: "Articles"
       follow: "Follow"
       stop_follow: "Unfollow."
       yes: "Yes"
@@ -55,11 +56,13 @@ en:
     team: "Team"
     contact: "Contact"
     faq: "FAQ"
+    forum: "Forum"
     help: "Help"
+    blog: "Blog"
 # Devise
   devise:
     captcha:
-      error: "There was an error with the recaptcha code below. Please re-enter the code." 
+      error: "There was an error with the recaptcha code below. Please re-enter the code."
     links:
       sign_in: "Sign in"
       sign_up: "Sign up"
@@ -102,13 +105,19 @@ en:
       mobile: "Mobile number"
       fax: "Fax"
       about_me: "About me"
-# Formtastic     
-  formtastic: 
-# Login 
+# Formtastic
+  formtastic:
+    labels:
+      user:
+        agecheck: "I am at least 18 years old."
+        privacy: "accept data privacy agreement"
+        legal: "accept TOS agreement"
+        password: "Password"
+# Login
     actions:
       login: "Login"
     labels:
-      auction:
+      article:
         categories: Categories
         categories_and_ancestors: Categories
 # User Model/Controller
@@ -137,23 +146,23 @@ en:
       stop_following: "Stop following"
       followers: "Followers"
       followers_info: "People who follow me"
-      following_info: "Things and People I follow"  
+      following_info: "Things and People I follow"
     founder: "Founder"
-# Auction Model/Controller
-  auction:
+# Article Model/Controller
+  article:
     hero:
       search: "Search for"
       filter: "Filter by"
       category: "Select category"
       remove_filter: " Remove condition filter"
-    form: 
-      head: "This is the form you have to fill for creating an auction."
+    form:
+      head: "This is the form you have to fill for creating an article."
       category: "Select a category for your Product"
       details: "Select product details"
       expire_date: "Date (Day/Month/Year)"
       expire_time: "Time (Hours/Minutes)"
       transaction:
-        auction: "Auction"
+        article: "Article"
         fixed_price: "Fixed-Price"
         preview: "Preview"
     labels:
@@ -161,31 +170,31 @@ en:
       shipping_condition: "Shipping condition"
       expiration_date: "Expiration date"
       type: "Type"
-      submit: "Create Auction"
+      submit: "Create Article"
     list:
       header: "Results"
     notices:
-      create: "Auction was successfully created."
-      update: "Auction was successfully updated."
+      create: "Article was successfully created."
+      update: "Article was successfully updated."
       image: "Image was successfully uploaded."
     hints:
-      title:  "Enter the auction's title"
-      content: "Enter a description for your auction"
-      condition: "Enter the auctions type"
-      price: "Enter the auction's price"
+      title:  "Enter the article's title"
+      content: "Enter a description for your article"
+      condition: "Enter the articles type"
+      price: "Enter the article's price"
       date: "Date (Day/Month/Year)"
       time: "Time (Hours/Minutes)"
     image:
       title: "Upload an image"
       upload: "Upload"
     titles:
-      new: "New Auction"  
-      edit: "Editing auction"  
+      new: "New Article"
+      edit: "Editing article"
     actions:
       profile: "View seller"
-      report: "Report auction"
-      reported: "Auction successfully reported. The team will take care of it."
-      reported-error: "You have to write a text in order to report a auction."
+      report: "Report article"
+      reported: "Article successfully reported. The team will take care of it."
+      reported-error: "You have to write a text in order to report a article."
     categories:
       proposal:
         question: "Do you miss a category?"
@@ -210,10 +219,10 @@ en:
     menu:
       edit: "Edit Profile"
       community: "TrustCommunity"
- 
-    auction:
-      create: "Auction was created"
-      update: "Auction was updated"
+
+    article:
+      create: "Article was created"
+      update: "Article was updated"
     invitation:
       send: "Invitation was sent"
     search_users:
@@ -259,9 +268,9 @@ en:
       confirm: "Invitation Confirmation"
     invitated: "You have been invitated from"
     notices:
-      confirmation: "The invitation has been confirmed. An Account has been created with the following data. 
-                      The password will be sent by e-mail. 
-                      You can change the account settings after you logged-in!"  
+      confirmation: "The invitation has been confirmed. An Account has been created with the following data.
+                      The password will be sent by e-mail.
+                      You can change the account settings after you logged-in!"
       create: "Einladung wurde versendet"
       not_available: "Einladung nicht verfügbar"
       activation_error: "Activation failed."
@@ -273,7 +282,7 @@ en:
         data: "Was passiert mit diesen Daten?"
         problems: "Was passiert, wenn Probleme mit
                   einer Person auftreten, die ich
-                  eingeladen habe?"  
+                  eingeladen habe?"
       important: "Lade nur Personen ein,
                 von denen Du sicher
                 bist, dass sie fair mit
@@ -319,9 +328,9 @@ en:
 # Errors
   errors: &errors
     messages:
-      at_least_one_entry: at least one option has to be selected 
+      at_least_one_entry: at least one option has to be selected
       minimum_entries: at least %{count} options need to be selected
-      maximum_entries: not more than %{count} options can be selected 
+      maximum_entries: not more than %{count} options can be selected
       minimum_categories: at least one option has to be selected
       maximum_categories: not more than 2 options can be selected
   activemodel:
@@ -329,4 +338,4 @@ en:
       <<: *errors
   activerecord:
     errors:
-      <<: *errors      
+      <<: *errors

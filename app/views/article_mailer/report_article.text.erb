@@ -1,0 +1,7 @@
+Article reported with ID <%= @article.id %> :  <%= @text %>
+===========================================================
+
+Article link: <%= polymorphic_url(@article) %>
+Admin link: <%= polymorphic_url([:admin, @article]) %>
+
+<%= render '/shared/email_footer' %>

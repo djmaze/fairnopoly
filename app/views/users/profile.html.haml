@@ -1,0 +1,111 @@
+-#
+-#
+-# == License:
+-# Fairnopoly - Fairnopoly is an open-source online marketplace.
+-# Copyright (C) 2013 Fairnopoly eG
+-#
+-# This file is part of Fairnopoly.
+-#
+-# Fairnopoly is free software: you can redistribute it and/or modify
+-# it under the terms of the GNU Affero General Public License as
+-# published by the Free Software Foundation, either version 3 of the
+-# License, or (at your option) any later version.
+-#
+-# Fairnopoly is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU Affero General Public License for more details.
+-#
+-# You should have received a copy of the GNU Affero General Public License
+-# along with Fairnopoly.  If not, see <http://www.gnu.org/licenses/>.
+-#
+
+.Meta
+  .Meta--block
+    %h2= resource.nickname
+
+    - if resource.valid? && resource.is_a?(LegalEntity)
+      %h3
+        - if resource.title?
+          = resource.title + " "
+
+      - if resource.forename && resource.surname
+        %p
+          = t('formtastic.labels.user.contact_person')
+          \:
+          %strong= resource.forename + " " + resource.surname
+
+      - if resource.address_suffix
+        %p
+          = t('formtastic.labels.user.address_suffix')
+          \:
+          %strong= resource.address_suffix
+
+      - if resource.street
+        %p
+          = t('formtastic.labels.user.street')
+          \:
+          %strong= resource.street
+
+      - if resource.zip && resource.city
+        %p
+          = t('formtastic.labels.user.city')
+          \:
+          %strong= resource.zip + " " + resource.city
+
+      - if resource.country
+        %p
+          = t('formtastic.labels.user.country')
+          \:
+          %strong= resource.country
+
+      - if resource.email
+        %p
+          = t('formtastic.labels.user.mail')
+          \:
+          %strong
+            %a{:href => "mailto:#{resource.email}"}= resource.email
+
+      - if resource.fax
+        %p
+          = t('formtastic.labels.user.fax')
+          \:
+          %strong= resource.fax
+
+      - if resource.phone
+        %p
+          = t('formtastic.labels.user.phone')
+          \:
+          %strong= resource.phone
+
+      - if resource.mobile
+        %p
+          = t('formtastic.labels.user.mobile')
+          \:
+          %strong= resource.mobile
+
+  - if resource.valid? && resource.is_a?(LegalEntity)
+
+    - if resource.terms
+      .Meta--block
+        %p
+          %span.Meta--highlight
+            = t('formtastic.labels.user.terms')
+            \:
+          = raw resource.terms
+
+    - if resource.cancellation
+      .Meta--block
+        %p
+          %span.Meta--highlight
+            = t('formtastic.labels.user.cancellation')
+            \:
+          = raw resource.cancellation
+
+    - if resource.about
+      .Meta--block
+        %p
+          %span.Meta--highlight
+            = t('formtastic.labels.user.about')
+            \:
+          = raw resource.about

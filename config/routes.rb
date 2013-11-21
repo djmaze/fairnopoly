@@ -1,120 +1,116 @@
+#
+#
+# == License:
+# Fairnopoly - Fairnopoly is an open-source online marketplace.
+# Copyright (C) 2013 Fairnopoly eG
+#
+# This file is part of Fairnopoly.
+#
+# Fairnopoly is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Fairnopoly is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with Fairnopoly.  If not, see <http://www.gnu.org/licenses/>.
+#
 Fairnopoly::Application.routes.draw do
-  
-  resources :auction_templates, :except => [:show]
 
-  mount Tinycms::Engine => "/cms"
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  ActiveAdmin.routes(self)
+  namespace :admin do
+    resources :article
+  end
 
-  get "invitation/index"
+  resources :article_templates, :except => [:show, :index]
 
-  resources :categories
-  resources :images
-  resources :userevents
-  resources :events
-  resources :invitations
-  resources :ffps
-    
-  #devise_for :user
-  devise_for :user, controllers: { registrations: 'registrations' }
+  resources :mass_uploads, :only => [:new, :create, :show, :update] do
+    collection do
+      get 'image_errors'
+    end
+  end
 
-  resources :auctions do
-  #recources :userevents
-    get :autocomplete_auction_title, :on => :collection
+  get 'exports/show'
+
+  resources :contents
+
+  devise_for :user, controllers: { registrations: 'registrations', sessions: 'sessions' }
+
+  namespace :toolbox do
+    get 'session_expired', as: 'session_expired', constraints: {format: 'json'} # JSON info about session expiration. Might be moved to a custom controller at some point.
+    get 'confirm' , constraints: {format: 'js'}
+    get 'rss'
+    get 'notice/:id', action: "notice", as: 'notice'
+    get 'contact', as: 'contact'
+  end
+
+  namespace :bank_details do
+    get 'check', constraints: {format: 'json'}
+    get 'get_bank_name', constraints: {format: 'json'}
+  end
+
+  resources :articles do
     member do
       get 'report'
-      post 'follow'
-      post 'stop_follow'
     end
     collection do
-
+      get 'autocomplete'
     end
   end
 
+  resources :transactions, only: [:show, :edit, :update] do
+    member do
+      put 'edit' => 'transactions#edit', as: :step2
+      get 'already_sold'
+      get 'print_order_buyer'
+      #get 'print_order_seller'
+    end
+  end
+
+  get "welcome/reconfirm_terms"
+  post "welcome/reconfirm_terms"
+
   get "welcome/index"
+  get "mitunsgehen", to: 'welcome#landing'
+
+  get "feed", to: 'welcome#feed', constraints: {format: 'rss'}
+
+  resources :feedbacks, :only => [:create,:new]
 
   #the user routes
-  match 'dashboard' => 'dashboard#index'
-  match 'dashboard/profile' => 'dashboard#profile'
-  match 'dashboard/search_users' => 'dashboard#search_users'
-  match 'search_users' => 'dashboard#search_users'
-  match 'dashboard/admin' => 'dashboard#admin'
-  
-  match 'dashboard/follow' => 'dashboard#follow'
-  match 'dashboard/stop_follow' => 'dashboard#stop_follow'
-  
-  match 'dashboard/list_followers' => 'dashboard#list_followers'
-  match 'dashboard/list_following' => 'dashboard#list_following'
-  match 'community' => 'dashboard#community'
-  #match 'autocomplete_user_name' => 'dashboard#autocomplete_user_name'
-  #confirmation invitation
-  match 'confirm_invitation' => 'invitations#confirm'
 
-  match 'event' => 'userevents#index'
-  match 'invitation' => 'invitations#new'
-
-
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
-
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  root :to => 'welcome#index'
-
-#root :to => 'dashboard#index'
-
-# See how all your routes lay out with "rake routes"
-
-# This is a legacy wild controller route that's not recommended for RESTful applications.
-# Note: This route will make all actions in every controller accessible via GET requests.
-# match ':controller(/:action(/:id))(.:format)'
-  scope :constraints => lambda {|request|
-    request.params[:id] && !["assets","system","admin","public"].any?{|url| request.params[:id].match(/^#{url}/)}
-  } do
-    match "/*id" => 'tinycms/contents#show'
+  resources :users, :only => [:show] do
+    resources :libraries, :except => [:new,:edit]
+    resources :library_elements, :except => [:new, :edit]
+    resources :ratings, :only => [:create, :index] do
+      get '/:transaction_id', to: 'ratings#new', as: 'transaction', on: :new
+    end
+    collection do
+      get 'login'
+    end
+    member do
+      get 'profile'
+    end
   end
+
+  resources :libraries, :only => [:index,:show]
+
+  resources :categories, :only => [:show,:index]
+
+  resources :exhibits, :only => [:create,:update]
+
+  root :to => 'welcome#index' # Workaround for double root https://github.com/gregbell/active_admin/issues/2049
+
+  # TinyCMS Routes Catchup
+  scope :constraints => lambda {|request|
+    request.params[:id] && !["assets","system","admin","public","favicon.ico", "favicon"].any?{|url| request.params[:id].match(/^#{url}/)}
+  } do
+    match "/*id" => 'contents#show'
+  end
+
 end

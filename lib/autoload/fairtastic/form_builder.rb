@@ -1,86 +1,85 @@
+#
+#
+# == License:
+# Fairnopoly - Fairnopoly is an open-source online marketplace.
+# Copyright (C) 2013 Fairnopoly eG
+#
+# This file is part of Fairnopoly.
+#
+# Fairnopoly is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Fairnopoly is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with Fairnopoly.  If not, see <http://www.gnu.org/licenses/>.
+#
 # Autoloading did not work, thus, I require our custom inputs explicitly
 
-#require_relative "inputs/plain_radio_input"
+# also see initializers/fairtastic.rb
 
 module Fairtastic
-  
-  class FormBuilder < FormtasticBootstrap::FormBuilder
-     
-     include Fairtastic::Helpers::FieldsetWrapper
-     
-     def input_with_purpose(*args)
-       template.content_tag(:li,
-         input(*extended_radio_args(*args)) << input(*pupose_args(*args)),
-         :class => "questionnaire-entry"
-       )
-     end
-     
-     def input_with_explanation(*args)
-       template.content_tag(:li,
-         input(*extended_radio_args(*args)) << input(*explanation_args(*args)),
-         :class => "questionnaire-entry"
-       )
-     end
-     
-     # TODO find out how to customize inputs-method (pluralversion), move steps to its own class 
-     def input_step(step_key, options = {}, &block)
-       css = "input-step"
-       css << " default-step" if options[:default_step]
-       
-       template.content_tag(:div,
-         step_heading_html(step_key, options) <<
-         inputs(options, &block),
-         :class => css, :id => "#{step_key}_step"
-       )
-     end
-     
-     private
-     
-     def next_prefix
-       @prefix_count ||= 0
-       @prefix_count += 1
-       I18n.t("formtastic.input_steps.#{object_name}.prefix", :count => @prefix_count)
-     end
-     
-     def step_heading_html(step_key, options = {})
-       prefix = ""
-       unless options[:prefix] == false
-         prefix = next_prefix
-         prefix << " "
-       end
-       
-       template.content_tag(:div,
-         template.content_tag(:a,
-           template.content_tag(:h3,
-             prefix + I18n.t("formtastic.input_steps.#{object_name}.#{step_key}")
-           ), :href => "##{step_key}_step"
-         ), :class => "step-legend"
-         
-       )
-     end 
-     
-     def extended_radio_args(*args)
-       options = args.extract_options!
-       options[:prepend_label] = true
-       options[:as] ||= :plain_radio
-       args << options
-     end
-     
-     def pupose_args(*args)
-       options = args.extract_options!
-       options[:as] = options[:purpose_as] || :plain_check_boxes
-       args[0] = (args[0].to_s << "_purposes").to_sym
-       args << options
-     end
-     
-     def explanation_args(*args)
-       options = args.extract_options!
-       options[:as] = options[:explanation_as] || :text
-       options[:label] = I18n.t('formtastic.labels.questionnaire.explanation')
-       args[0] = (args[0].to_s << "_explanation").to_sym
-       args << options
-     end
-     
+  class FormBuilder < Formtastic::FormBuilder
+    #include Fairtastic::Helpers::FieldsetWrapper
+    include Fairtastic::Helpers::InputHelper
+    include Fairtastic::Inputs::Base::InputSteps
+
+    @@default_form_class = 'formtastic'
+
+    def inputs(*args, &block)
+      super(*extended_fieldset_args(*args),&block)
+    end
+
+
+    def semantic_errors(*args)
+      args.inject([]) do |array, method|
+        errors = Array(@object.errors[method.to_sym]).to_sentence
+        @input_step_with_errors ||=errors.present?
+      end
+      super
+    end
+
+
+    # Make Accordions red if contains errors
+    def semantic_fields_for(record_or_name_or_array, *args, &block)
+      relation = @object.send(record_or_name_or_array)
+      if relation.kind_of?(Array)
+        relation.each do |item|
+           @input_step_with_errors ||=item.errors.present?
+        end
+      else
+         @input_step_with_errors ||= (relation && relation.errors.present?)
+      end
+      super
+    end
+
+    def nested_inputs_for(association_name, options = {}, &block)
+      title = options[:name]
+      title = localized_string(association_name, object, nil) if title == true
+      title ||= ""
+
+      tooltip = optional_tooltip_html(association_name, options)
+      tooltip = template.content_tag(:span, tooltip) if tooltip.present?
+
+      title = template.content_tag(:h4, (title << tooltip).html_safe, :class => "questionnaire-entry")
+      title.html_safe << semantic_fields_for(association_name, options, &block)
+    end
+
+    private
+
+    def extended_fieldset_args(*args)
+      options = args.extract_options!
+      if options[:class]
+        options[:class] << " inputs"
+      else
+         options[:class] = "inputs"
+      end
+      args << options
+    end
   end
-  
 end

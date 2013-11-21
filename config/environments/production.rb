@@ -1,3 +1,24 @@
+#
+#
+# == License:
+# Fairnopoly - Fairnopoly is an open-source online marketplace.
+# Copyright (C) 2013 Fairnopoly eG
+#
+# This file is part of Fairnopoly.
+#
+# Fairnopoly is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Fairnopoly is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with Fairnopoly.  If not, see <http://www.gnu.org/licenses/>.
+#
 Fairnopoly::Application.configure do
 # Settings specified here will take precedence over those in config/application.rb
 
@@ -46,13 +67,18 @@ Fairnopoly::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+  config.assets.precompile += %w( noscript.css )
+  config.assets.precompile += %w( landing.css )
+  # config.assets.precompile += %w( font-awesome-ie7.min.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => 'beta.fairnopoly.de' }
+  config.action_mailer.default_url_options = { :host => 'www.fairnopoly.de' ,:protocol => 'https' }
   # Enable threaded mode
-  # config.threadsafe!
+  config.threadsafe!
+
+  config.eager_load_paths += %W(#{config.root}/lib/autoload)
+  config.eager_load_paths += Dir[Rails.root.join('app', 'models', '{**}')]
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
@@ -66,9 +92,7 @@ Fairnopoly::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   Paperclip.options[:command_path] = "/usr/bin"
 
-  ActionMailer::Base.smtp_settings  = YAML.load(File.read(File.expand_path(File.join( Rails.root, 'config', 'actionmailer.yml'))))
-  ActionMailer::Base.smtp_settings[:openssl_verify_mode] = false
-  ActionMailer::Base.smtp_settings[:enable_starttls_auto] = false
-  
-  
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings  = YAML.load(File.read(File.expand_path(File.join( Rails.root, 'config', 'actionmailer.yml')))).symbolize_keys
+
 end

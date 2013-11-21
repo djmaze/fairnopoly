@@ -1,0 +1,83 @@
+de:
+  users:
+    legal_status:
+      new:
+        legal_entity: "Ich bin gewerbliche(r) Anbieter*in oder juristische Person"
+        private_user: "Ich bin Privatperson"
+      edit:
+        legal_entity: "Gewerbliche(r) Anbieter*in oder juristische Person"
+        private_user: "Privatperson"
+        ngo: "Gemeinnützige Organisation"
+      show:
+        legal_entity: "Firmenprofil"
+        private_user: "Privatprofil"
+        ngo: "Gemeinnützige Organisation"
+    captcha:
+      error: "Es ist ein Fehler mit dem Captcha Code aufgetreten. Den Captcha Code bitte erneut eingeben."
+    legal: "Allgemeinen Geschäftsbedingungen."
+    legal_new: "Allgemeinen Geschäftsbedingungen."
+    terms_new_info: "die Allgemeinen Geschäftsbedingungen und Datenschutzerklährung haben sich geändert. Diese müssen akzeptiert werden, bevor du weiter machen kannst."
+    activate_all_articles: "Du kannst in diesem Schritt alle bisher eingestellten Artikel zum Verkauf auf Fairnopoly freischalten."
+    privacy: "Datenschutzerklärung."
+    complexify: Passwortstärke
+    visibility:
+      public: "Öffentlich"
+      private: "Privat"
+    login:
+      title: "Deine Login-Daten"
+    change_password: "Passwort ändern (optional)"
+    form_titles:
+      contact_person: "Ansprechpartner*in"
+      address: "Anschrift und Kontaktdaten"
+      payment_bank_account: "Bankverbindung"
+      payment_paypal: "PayPal"
+    countries:
+      germany: "Deutschland"
+    founder: "Gründer"
+    boxes:
+      my_article_templates: Meine Vorlagen
+      active: "Eingestellte Artikel"
+      inactive: "Nicht eingestellte Artikel"
+      sold: "Verkaufte Artikel"
+      bought: "Gekaufte Artikel"
+      export: "Artikel exportieren"
+      import: "Artikel per CSV-Datei importieren"
+    no_img: "Noch+kein+Bild"
+    headers:
+      you: "Du"
+      invitor: "Einladender"
+      invited_people: "Eingeladene Benutzer"
+    text:
+      no_active_old: "Keine vorhanden"
+      no_active: "Stelle hier Deinen ersten Artikel ein"
+      no_active_html: "%{href}"
+      no_inactive: "Keine Artikel vorhanden"
+      no_sold: "Keine verkauften Artikel vorhanden"
+      no_bought: "Keine gekauften Artikel vorhanden"
+      no_templates: "Keine Templates vorhanden"
+      no_libraries: "Dieser Nutzer hat keine öffentlichen Sammlungen"
+      no_description: "Noch keine Beschreibung hinzugefügt."
+      add_desription: "Beschreibung hinzufügen"
+    actions:
+      edit_account: "Profil bearbeiten"
+      show_account: "Profil"
+      send_invitation: "Einladung schicken"
+    menu:
+      edit: "Profil bearbeiten"
+      community: "Vertrauensgemeinschaft"
+    article:
+      create: "Auktion wurde erstellt"
+      update: "Auktion wurde aktualisiert"
+    invitation:
+      send: "Einladung wurde verschickt"
+    search_users:
+      head: "Suche nach Benutzern"
+    community:
+      new_invitation: "Lade jemanden in die Vertrauensgemeinschaft ein"
+      existing_invitation: "Lade einen registrierten Benutzer in die Vertrauensgemeinschaft ein"
+      no_invited: "Du hast noch Niemand in die Vertrauensgemeinschaft eingeladen"
+    print:
+      terms: "AGB von %{name}"
+      cancellation: "Widerrufsbelehrung und Rücknahmeerklärung von %{name}"
+
+
